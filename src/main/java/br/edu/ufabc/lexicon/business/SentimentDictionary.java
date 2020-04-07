@@ -26,6 +26,16 @@ public class SentimentDictionary {
         }
     }
 
+    public SentimentWord.Polarity findPolarity(String word) {
+        if (isPositive(word)) {
+            return SentimentWord.Polarity.POSITIVE;
+        } else if (isNegative(word)) {
+            return SentimentWord.Polarity.NEGATIVE;
+        } else {
+            return null;
+        }
+    }
+
     public boolean isPositive(String word) {
         return Collections.binarySearch(positiveList, word) >= 0;
     }
