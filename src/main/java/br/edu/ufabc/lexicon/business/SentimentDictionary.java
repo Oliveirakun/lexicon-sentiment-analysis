@@ -37,11 +37,11 @@ public class SentimentDictionary {
     }
 
     public boolean isPositive(String word) {
-        return Collections.binarySearch(positiveList, word) >= 0;
+        return positiveList.contains(word);
     }
 
     public boolean isNegative(String word) {
-        return Collections.binarySearch(negativeList, word) >= 0;
+        return negativeList.contains(word);
     }
 
     private void setNegativeList() throws URISyntaxException, IOException {

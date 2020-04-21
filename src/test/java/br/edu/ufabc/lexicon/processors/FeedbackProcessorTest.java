@@ -29,4 +29,20 @@ public class FeedbackProcessorTest {
 
         Assert.assertEquals(expectedResult, result);
     }
+
+    @Test
+    public void testOutput2() {
+        String feedback = "The waiter ignored us for 20 minutes";
+
+        List<String> expectedResult = Arrays.asList(
+            "waiter",
+            "ignore",
+            "minute"
+        );
+
+        FeedbackProcessor processor = new FeedbackProcessor(feedback.toString());
+        List<String> result = processor.process();
+
+        Assert.assertEquals(expectedResult, result);
+    }
 }

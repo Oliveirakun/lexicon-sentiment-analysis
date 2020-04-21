@@ -24,17 +24,21 @@ public class SentimentFeedback {
 
     public int sentimentScore() {
         return wordsList.stream()
-                        .map(word-> word.overallAttitude())
-                        .reduce(0, Integer::sum);
+            .map(word-> word.overallAttitude())
+            .reduce(0, Integer::sum);
+    }
+
+    public List<SentimentWord> getWordsList() {
+        return wordsList;
     }
 
     private SentimentWord findWord(String word) {
         Optional<SentimentWord> sentWord = wordsList
-                        .stream()
-                        .filter(sword-> sword.getWord().equals(word))
-                        .map(Optional::ofNullable)
-                        .findFirst()
-                        .orElse(null);
+            .stream()
+            .filter(sword-> sword.getWord().equals(word))
+            .map(Optional::ofNullable)
+            .findFirst()
+            .orElse(null);
 
         return sentWord == null ? null : sentWord.get();
     }

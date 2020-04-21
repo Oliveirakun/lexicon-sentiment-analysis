@@ -17,13 +17,13 @@ public class FeedbackProcessor {
     public List<String> process() {
         return Stream
                 .of(feedback.split(" "))
-                .filter(word-> isNotStopWord(word))
+                .map(word-> word.toLowerCase().trim())
+                .filter(this::isNotStopWord)
                 .map(word-> word.replaceAll("[^a-zA-Z ]", ""))
+                .filter(word-> !word.isEmpty())
                 .map(word-> new Sentence(word).lemma(0))
-                .map(word-> word.toLowerCase())
+                .filter(this::isNotStopWord)
                 .collect(Collectors.toList());
-
-
     }
 
     private boolean isNotStopWord(String word) {
@@ -59,7 +59,8 @@ public class FeedbackProcessor {
             "across",
             "through",
             "about",
-            "onto"
+            "onto",
+            "we"
         );
     }
 }
