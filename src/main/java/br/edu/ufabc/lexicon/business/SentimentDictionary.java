@@ -37,11 +37,11 @@ public class SentimentDictionary {
     }
 
     public boolean isPositive(String word) {
-        return positiveList.contains(word);
+        return Collections.binarySearch(positiveList, word) >= 0;
     }
 
     public boolean isNegative(String word) {
-        return negativeList.contains(word);
+        return Collections.binarySearch(negativeList, word) >= 0;
     }
 
     private void setNegativeList() throws URISyntaxException, IOException {
@@ -51,6 +51,8 @@ public class SentimentDictionary {
         Stream<String> lines = Files.lines(path);
         this.negativeList = lines.map(word-> word.replaceAll("\"",""))
                                  .collect(Collectors.toList());
+
+        Collections.sort(this.negativeList);
         lines.close();
     }
 
@@ -61,6 +63,8 @@ public class SentimentDictionary {
         Stream<String> lines = Files.lines(path);
         this.positiveList = lines.map(word-> word.replaceAll("\"",""))
                                  .collect(Collectors.toList());
+
+        Collections.sort(this.positiveList);
         lines.close();
     }
 }
