@@ -14,3 +14,13 @@ negative
 neutral
 negative
 negative
+negative
+neutral
+positive
+positive
+positive
+positive
+positive
+positive
+positive
+neutral

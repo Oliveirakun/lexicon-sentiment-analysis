@@ -16,7 +16,7 @@ public class VoteAndFlip {
 
     public int finalPolarity() {
         List<String> words = new FeedbackProcessor(feedback).process();
-        int finalPolarity = priorPolarity;
+        int finalPolarity = 0;
         boolean flipPolarity = false;
         long sumNegatingWords = words
             .stream()
@@ -27,11 +27,13 @@ public class VoteAndFlip {
             flipPolarity = true;
 
         if (priorPolarity > 0 && flipPolarity)
-            finalPolarity = priorPolarity - 2;
-        else if (priorPolarity < 0 && flipPolarity)
-            finalPolarity = priorPolarity + 2;
-        else if (priorPolarity == 0 && flipPolarity)
             finalPolarity = -1;
+        else if (priorPolarity < 0 && flipPolarity)
+            finalPolarity = 0;
+        else if (priorPolarity == 0 && flipPolarity)
+            finalPolarity = 0;
+        else
+            finalPolarity = priorPolarity;
 
         return finalPolarity;
     }
@@ -41,7 +43,7 @@ public class VoteAndFlip {
             "aint", "doesnt", "havent", "lacks", "none", "mightnt", "shouldnt", "cannot",
             "dont", "havnt", "neither", "nor", "mustnt", "wasnt", "cant", "hadnt", "isnt",
             "never", "not", "neednt", "without", "darent", "hardly", "lack", "no", "nothing",
-            "oughtnt", "wouldnt", "didnt", "hasnt", "lacking", "nowhere", "shant", "but"
+            "oughtnt", "wouldnt", "didnt", "hasnt", "lacking", "nowhere", "shant", "but","couldve"
         );
     }
 }
