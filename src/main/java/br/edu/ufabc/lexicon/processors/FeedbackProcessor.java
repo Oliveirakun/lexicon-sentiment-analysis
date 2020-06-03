@@ -32,35 +32,9 @@ public class FeedbackProcessor {
 
     private List<String> stopWordsList() {
         return Arrays.asList(
-            "and",
-            "also",
-            "it",
-            "to",
-            "the",
-            "relate",
-            "for",
-            "from",
-            "in",
-            "of",
-            "on",
-            "with",
-            "at",
-            "since",
-            "ago",
-            "before",
-            "past",
-            "till",
-            "until",
-            "by",
-            "next",
-            "beside",
-            "over",
-            "bellow",
-            "across",
-            "through",
-            "about",
-            "onto",
-            "we"
+            "and", "also", "it", "to", "the", "relate", "for", "from", "in", "of", "on",
+            "with", "at", "since", "ago", "before", "past", "till", "until", "by", "next",
+            "beside", "over", "bellow", "across", "through", "about", "onto", "we"
         );
     }
 }

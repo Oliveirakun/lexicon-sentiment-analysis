@@ -49,10 +49,11 @@ public class SentimentDictionary {
             .getResource("negative.txt").toURI());
 
         Stream<String> lines = Files.lines(path);
-        this.negativeList = lines.map(word-> word.replaceAll("\"",""))
+        negativeList = lines.map(word-> word.replaceAll("\"",""))
                                  .collect(Collectors.toList());
 
-        Collections.sort(this.negativeList);
+        modifyPolarityOfNegativeWords();
+        Collections.sort(negativeList);
         lines.close();
     }
 
@@ -61,10 +62,38 @@ public class SentimentDictionary {
                 .getResource("positive.txt").toURI());
 
         Stream<String> lines = Files.lines(path);
-        this.positiveList = lines.map(word-> word.replaceAll("\"",""))
+        positiveList = lines.map(word-> word.replaceAll("\"",""))
                                  .collect(Collectors.toList());
 
-        Collections.sort(this.positiveList);
+        modifyPolarityOfPositiveWords();
+        Collections.sort(positiveList);
         lines.close();
+    }
+
+    private void modifyPolarityOfPositiveWords() {
+        positiveList.add("challenge");
+        positiveList.add("overcome");
+        positiveList.add("concern");
+        positiveList.add("concerned");
+        positiveList.add("concerns");
+    }
+
+    private void modifyPolarityOfNegativeWords() {
+        negativeList.removeAll(Arrays.asList("fun"));
+        negativeList.removeAll(Arrays.asList("fine"));
+        negativeList.removeAll(Arrays.asList("miss"));
+        negativeList.removeAll(Arrays.asList("challenge"));
+        negativeList.removeAll(Arrays.asList("extreme"));
+        negativeList.removeAll(Arrays.asList("extremely"));
+        negativeList.removeAll(Arrays.asList("thumb"));
+        negativeList.removeAll(Arrays.asList("object"));
+        negativeList.removeAll(Arrays.asList("overcome"));
+        negativeList.removeAll(Arrays.asList("lecture"));
+        negativeList.removeAll(Arrays.asList("negative"));
+        negativeList.removeAll(Arrays.asList("concern"));
+        negativeList.removeAll(Arrays.asList("concerned"));
+        negativeList.removeAll(Arrays.asList("concerns"));
+        negativeList.removeAll(Arrays.asList("extreme"));
+        negativeList.removeAll(Arrays.asList("need"));
     }
 }

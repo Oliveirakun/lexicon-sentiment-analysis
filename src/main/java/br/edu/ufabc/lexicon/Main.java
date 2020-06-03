@@ -1,5 +1,6 @@
 package br.edu.ufabc.lexicon;
 
+import br.edu.ufabc.lexicon.business.FeedbackAnalysis;
 import br.edu.ufabc.lexicon.business.SentimentAnalyser;
 import com.kennycason.kumo.CollisionMode;
 import com.kennycason.kumo.PolarBlendMode;
@@ -16,20 +17,58 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) throws IOException, URISyntaxException {
-        Path path = Paths.get(Main.class.getClassLoader().getResource("feedbacks.txt").toURI());
-        List<String> feedbacks = Files.lines(path).collect(Collectors.toList());
+        Path pathFeedbacks = Paths.get(Main.class.getClassLoader().getResource("feedbacks.txt").toURI());
+        Path pathPolarities = Paths.get(Main.class.getClassLoader().getResource("feedbacks-polarity.txt").toURI());
+
+        List<String> feedbacks = Files.lines(pathFeedbacks).collect(Collectors.toList());
+        List<String> polarities = Files.lines(pathPolarities).collect(Collectors.toList());
 
         SentimentAnalyser analyser =  new SentimentAnalyser(feedbacks);
 
-        System.out.println("Feedback: " + analyser.getAnalyzedFeedbacks().get(10).getOriginalFeedback());
-        System.out.println("Sentiment Score: " + analyser.getAnalyzedFeedbacks().get(10).getSentimentScore());
+        int totalCorrect = 0;
+        int totalCorrectOriginalPolarity = 0;
+        for(int i=0;i<feedbacks.size();i++) {
+            FeedbackAnalysis feedback = analyser.getAnalyzedFeedbacks().get(i);
+            System.out.println("Feedback: " + feedback.getOriginalFeedback());
+            System.out.println("Sentiment Score: " + feedback.getSentimentScore());
+            System.out.println("Fliped polarity: " + feedback.flipedPolarity());
+            System.out.println("Desired: " + polarities.get(i));
+
+            // Fliped
+            if (feedback.flipedPolarity() > 0 && polarities.get(i).equals("positive"))
+                totalCorrect++;
+
+            if (feedback.flipedPolarity() < 0 && polarities.get(i).equals("negative"))
+                totalCorrect++;
+
+            if (feedback.flipedPolarity() == 0 && polarities.get(i).equals("neutral"))
+                totalCorrect++;
+
+            // Original
+            if (feedback.getSentimentScore() > 0 && polarities.get(i).equals("positive"))
+                totalCorrectOriginalPolarity++;
+
+            if (feedback.getSentimentScore() > 0 && polarities.get(i).equals("negative"))
+                totalCorrectOriginalPolarity++;
+
+            if (feedback.getSentimentScore() == 0 && polarities.get(i).equals("neutral"))
+                totalCorrectOriginalPolarity++;
+
+        }
+
+        double totalOriginal = ((double)totalCorrectOriginalPolarity / (double)feedbacks.size()) * 100;
+        System.out.println("Porcentagem acertos original: " + totalOriginal);
+
+        double total = ((double)totalCorrect / (double)feedbacks.size()) * 100;
+        System.out.println("Porcentagem acertos fliped: " + total);
+
 
         analyser.getWordsOverallAttitude().forEach(word-> {
             System.out.println("Word: " + word.getWord() + " Attitude: " + word.overallAttitude());
@@ -54,9 +93,8 @@ public class Main {
         Dimension dimension = new Dimension(600, 480);
         PolarWordCloud wordCloud = new PolarWordCloud(dimension, CollisionMode.PIXEL_PERFECT, PolarBlendMode.BLUR);
         wordCloud.setPadding(2);
-        wordCloud.setBackground(new CircleBackground(200));
-//        wordCloud.setBackgroundColor(Color.WHITE);
-        wordCloud.setFontScalar(new SqrtFontScalar(10, 60));
+        wordCloud.setBackground(new CircleBackground(300));
+        wordCloud.setFontScalar(new SqrtFontScalar(10, 50));
         wordCloud.build(positiveWords, negativeWords);
         File tempFile = File.createTempFile("words",".png");
         wordCloud.writeToFile(tempFile.getPath());
@@ -77,3 +115,5 @@ public class Main {
         frame.setVisible(true);
     }
 }
+
+

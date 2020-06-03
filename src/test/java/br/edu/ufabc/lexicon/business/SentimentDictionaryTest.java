@@ -15,5 +15,7 @@ public class SentimentDictionaryTest {
 
         Assert.assertEquals(false, dictionary.isNegative("stable"));
         Assert.assertEquals(false, dictionary.isPositive("bad"));
+
+        Assert.assertEquals(false, dictionary.isNegative("need"));
     }
 }

@@ -16,4 +16,9 @@ public class FeedbackAnalysis {
     public int getSentimentScore() {
         return sentimentFeedback.sentimentScore();
     }
+
+    public int flipedPolarity() {
+        VoteAndFlip flip = new VoteAndFlip(originalFeedback, sentimentFeedback.sentimentScore());
+        return flip.finalPolarity();
+    }
 }
