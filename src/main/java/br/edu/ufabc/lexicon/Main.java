@@ -62,10 +62,10 @@ public class Main {
         }
 
         double totalOriginal = ((double)totalCorrectOriginalPolarity / (double)feedbacks.size()) * 100;
-        System.out.println("Porcentagem acertos original: " + totalOriginal);
+        System.out.println("Percentage correct original: " + totalOriginal);
 
         double total = ((double)totalCorrect / (double)feedbacks.size()) * 100;
-        System.out.println("Porcentagem acertos fliped: " + total);
+        System.out.println("Porcentage correct flipped: " + total);
 
         buildWordCloud(analyser);
     }
