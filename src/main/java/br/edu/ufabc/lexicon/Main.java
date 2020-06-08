@@ -65,7 +65,7 @@ public class Main {
         System.out.println("Percentage correct original: " + totalOriginal);
 
         double total = ((double)totalCorrect / (double)feedbacks.size()) * 100;
-        System.out.println("Porcentage correct flipped: " + total);
+        System.out.println("Percentage correct flipped: " + total);
 
         buildWordCloud(analyser);
     }

@@ -48,7 +48,7 @@ Score   |   Polarity
 In the last line, will be printed the percentage of correct polarities classified by each implementation:
 ```
 Percentage correct original: 76.47058823529412
-Porcentage correct flipped: 80.3921568627451
+Percentage correct flipped: 80.3921568627451
 ```
 Additionaly, will be displayed a word cloud image with all positive(green) and negative(red) words found in the feedbacks:
 
