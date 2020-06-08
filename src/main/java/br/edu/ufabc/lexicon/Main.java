@@ -53,7 +53,7 @@ public class Main {
             if (feedback.getSentimentScore() > 0 && polarities.get(i).equals("positive"))
                 totalCorrectOriginalPolarity++;
 
-            if (feedback.getSentimentScore() > 0 && polarities.get(i).equals("negative"))
+            if (feedback.getSentimentScore() < 0 && polarities.get(i).equals("negative"))
                 totalCorrectOriginalPolarity++;
 
             if (feedback.getSentimentScore() == 0 && polarities.get(i).equals("neutral"))
