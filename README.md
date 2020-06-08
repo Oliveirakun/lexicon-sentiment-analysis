@@ -1,4 +1,4 @@
-# Student's feedback polarity classifier
+# Lexicon Sentiment Analysis
 This repository contains the code used to reproduce the experiment for my article
 about sentiment analysis. 
 
