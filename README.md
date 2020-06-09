@@ -18,6 +18,10 @@ This project uses a sentiment analysis algorithm to classify student's feedbacks
 in one of these three categories: positive, negative or neutral.
 It implements the algorithm proposed by the original authors and a different version with some
 modifications, according to the proposal of my article.
+The sentiment dictionary used in this experiment is the [MPQA corpus](http://mpqa.cs.pitt.edu/corpora/mpqa_corpus/), 
+the same used in the original article, and all
+words from the dictionary can be found in these two files: `positive.txt`(with all positive words) and `negative.txt`
+(with all negative words). 
 
 When you run this project, it will process all feedbacks from the file `feedbacks.txt`, compare the results with
 the polarities in the other file `feedbacks-polarity.txt`  and will show a comparative of the results obtained from each algorithm
